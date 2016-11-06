@@ -5,7 +5,7 @@ import octoprint.plugin
 import socket
 
 class ipOnHeaderPlugin(octoprint.plugin.StartupPlugin,octoprint.plugin.SettingsPlugin):
-	def on_startup(self):
+	def on_after_startup(self):
 		self._logger.info("ipOnHeaderPlugin: " + [(s.connect(('8.8.8.8', 53)), s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, socket.SOCK_DGRAM)]][0][1])
 		self._settings.global_set(["appearance","name"],[(s.connect(('8.8.8.8', 53)), s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, socket.SOCK_DGRAM)]][0][1])
 		self._settings.save()
